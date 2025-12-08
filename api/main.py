@@ -4,6 +4,12 @@ QuantDB API Service
 FastAPI application using core business logic services.
 """
 
+import sys
+from pathlib import Path
+
+# Add the parent directory to the path for imports
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 from contextlib import asynccontextmanager
 
 from fastapi import Depends, FastAPI
