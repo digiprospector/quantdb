@@ -140,6 +140,9 @@ Direct access to deployed Streamlit Cloud version:
 git clone https://github.com/franksunye/quantdb.git
 cd quantdb
 
+# Install some compile utils in debian13
+sudo apt install -y gcc g++ python3-dev
+
 # Install dependencies
 pip install -r requirements.txt
 

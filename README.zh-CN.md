@@ -121,6 +121,9 @@ stats = qdb.cache_stats()
 git clone https://github.com/franksunye/quantdb.git
 cd quantdb
 
+# debian13需要先安装一些编译工具
+sudo apt install -y gcc g++ python3-dev
+
 # 安装依赖
 pip install -r requirements.txt
 
