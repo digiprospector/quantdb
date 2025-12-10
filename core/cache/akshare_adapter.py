@@ -260,18 +260,31 @@ class AKShareAdapter:
                 ) or clean_symbol.lower().startswith("sz"):
                     clean_symbol = clean_symbol[2:]
 
-                logger.info(
-                    f"Getting A-share data using stock_zh_a_hist for {clean_symbol} with period={period}, adjust={adjust}"
-                )
-
-                df = self._safe_call(
-                    ak.stock_zh_a_hist,
-                    symbol=clean_symbol,
-                    period=period,
-                    start_date=start_date,
-                    end_date=end_date,
-                    adjust=adjust,
-                )
+                # 判断是普通A股还是ETF
+                if clean_symbol.startswith(("159", "51", "52", "53", "55", "56", "58")):  # ETF
+                    logger.info(
+                        f"Getting ETF data using fund_etf_hist_em for {clean_symbol} with period={period}, adjust={adjust}"
+                    )
+                    df = self._safe_call(
+                        ak.fund_etf_hist_em,
+                        symbol=clean_symbol,
+                        period=period,
+                        start_date=start_date,
+                        end_date=end_date,
+                        adjust=adjust,
+                    )
+                else:
+                    logger.info(
+                        f"Getting A-share data using stock_zh_a_hist for {clean_symbol} with period={period}, adjust={adjust}"
+                    )
+                    df = self._safe_call(
+                        ak.stock_zh_a_hist,
+                        symbol=clean_symbol,
+                        period=period,
+                        start_date=start_date,
+                        end_date=end_date,
+                        adjust=adjust,
+                    )
 
             elif market == "HK_STOCK":
                 # For Hong Kong stocks, use stock_hk_hist

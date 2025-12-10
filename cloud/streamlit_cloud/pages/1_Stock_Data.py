@@ -15,7 +15,7 @@ import streamlit as st
 # Add project root directory to path to access core modules
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
-project_root = os.path.dirname(parent_dir)  # 回到QuantDB根目录
+project_root = os.path.dirname(os.path.dirname(parent_dir))  # 回到QuantDB根目录
 if project_root not in sys.path:
     sys.path.append(project_root)
 
@@ -72,7 +72,8 @@ def validate_stock_code(code: str) -> bool:
             return True
         elif code.startswith("688"):  # STAR Market
             return True
-
+        elif code.startswith(("159", "51", "52", "53", "55", "56", "58")):  # ETF
+            return True
     return False
 
 
